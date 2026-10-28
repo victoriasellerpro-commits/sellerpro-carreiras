@@ -253,3 +253,20 @@ export async function addJobPosition({ nome }) {
   if (error) return { error: error.message };
   return { jobPositions: data.map((r) => r.nome) };
 }
+
+export async function deleteJobPosition({ nome }) {
+  const trimmed = String(nome || '').trim();
+  if (!trimmed) return { error: 'INVALID_NAME' };
+
+  const { data: deleted, error: deleteErr } = await supabase
+    .from('job_positions')
+    .delete()
+    .eq('nome', trimmed)
+    .select('nome');
+  if (deleteErr) return { error: deleteErr.message };
+  if (!deleted.length) return { error: 'NOT_FOUND' };
+
+  const { data, error } = await supabase.from('job_positions').select('nome').order('nome');
+  if (error) return { error: error.message };
+  return { jobPositions: data.map((r) => r.nome) };
+}

@@ -23,3 +23,4 @@ export const deleteResult = (id) => store.deleteResult(id);
 export const checkDuplicateResult = (payload) => store.checkDuplicateResult(payload);
 export const getJobPositions = () => store.getJobPositions();
 export const addJobPosition = (payload) => store.addJobPosition(payload);
+export const deleteJobPosition = (payload) => store.deleteJobPosition(payload);

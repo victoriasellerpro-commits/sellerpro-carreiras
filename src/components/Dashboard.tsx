@@ -7,7 +7,8 @@ import {
   PlusCircle,
   ArrowUpDown,
   Loader2,
-  AlertCircle
+  AlertCircle,
+  Trash2
 } from 'lucide-react';
 import { CandidateResult, JobPosition } from '../types';
 import { AssessmentService } from '../services/apiService';
@@ -34,6 +35,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ onBackToTest, onUnauthoriz
   const [newPositionName, setNewPositionName] = useState('');
   const [isAddingPosition, setIsAddingPosition] = useState(false);
   const [addPositionError, setAddPositionError] = useState<string | null>(null);
+  const [deletingPosition, setDeletingPosition] = useState<string | null>(null);
+  const [deletePositionError, setDeletePositionError] = useState<string | null>(null);
 
   const loadJobPositions = () => {
     setLoadingPositions(true);
@@ -65,6 +68,30 @@ export const Dashboard: React.FC<DashboardProps> = ({ onBackToTest, onUnauthoriz
       }
     } finally {
       setIsAddingPosition(false);
+    }
+  };
+
+  const handleDeletePosition = async (nome: string) => {
+    if (deletingPosition) return;
+    const confirmed = window.confirm(
+      `Excluir a vaga "${nome}" da lista? Resultados e sessões existentes continuarão salvos com essa vaga.`
+    );
+    if (!confirmed) return;
+
+    setDeletingPosition(nome);
+    setDeletePositionError(null);
+    try {
+      const updated = await AssessmentService.deleteJobPosition(nome);
+      setJobPositions(updated);
+      setSelectedPosition((current) => current === nome ? 'all' : current);
+    } catch (err) {
+      if (err instanceof Error && err.message === 'unauthorized') {
+        onUnauthorized();
+      } else {
+        setDeletePositionError(err instanceof Error ? err.message : 'Não foi possível excluir a vaga.');
+      }
+    } finally {
+      setDeletingPosition(null);
     }
   };
 
@@ -259,7 +286,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onBackToTest, onUnauthoriz
               if (addPositionError) setAddPositionError(null);
             }}
             placeholder="Ex: Analista de RH"
-            className="flex-1 px-4 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors"
+            className="admin-job-position-input flex-1 px-4 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors"
           />
           <button
             id="btn-add-job-position"
@@ -280,6 +307,39 @@ export const Dashboard: React.FC<DashboardProps> = ({ onBackToTest, onUnauthoriz
             <AlertCircle className="w-3.5 h-3.5 mr-1 shrink-0" />
             {addPositionError}
           </p>
+        )}
+        {deletePositionError && (
+          <p className="mt-2 text-xs text-rose-600 flex items-center">
+            <AlertCircle className="w-3.5 h-3.5 mr-1 shrink-0" />
+            {deletePositionError}
+          </p>
+        )}
+        {!loadingPositions && jobPositions.length > 0 && (
+          <div className="mt-5 pt-4 border-t border-slate-200">
+            <p className="text-xs font-semibold text-slate-500 mb-3">Vagas cadastradas</p>
+            <ul className="flex flex-wrap gap-2">
+              {jobPositions.map((position) => (
+                <li
+                  key={position}
+                  className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-slate-50 pl-3 pr-1.5 py-1.5 text-xs font-medium text-slate-800"
+                >
+                  <span>{position}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleDeletePosition(position)}
+                    disabled={deletingPosition !== null}
+                    aria-label={`Excluir vaga ${position}`}
+                    title={`Excluir vaga ${position}`}
+                    className="inline-flex items-center justify-center rounded-md p-1.5 text-rose-600 hover:bg-rose-50 hover:text-rose-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  >
+                    {deletingPosition === position
+                      ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      : <Trash2 className="w-3.5 h-3.5" />}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
 

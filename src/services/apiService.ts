@@ -380,6 +380,29 @@ export class AssessmentService {
   }
 
   /**
+   * Removes a vaga from future candidate selection (requires admin session).
+   */
+  static async deleteJobPosition(nome: string): Promise<string[]> {
+    const res = await fetchWithTimeout('/api/job-positions', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ nome }),
+    });
+    if (res.status === 401) {
+      throw new Error('unauthorized');
+    }
+    if (res.status === 404) {
+      throw new Error('Vaga não encontrada.');
+    }
+    if (!res.ok) {
+      throw new Error('Não foi possível excluir a vaga.');
+    }
+    const data = await res.json();
+    return Array.isArray(data.jobPositions) ? data.jobPositions : [];
+  }
+
+  /**
    * Creates a new assessment session for this candidate, or resumes an existing
    * EM_ANDAMENTO one found by email. Returns {blocked: true} if already CONCLUÍDA.
    */

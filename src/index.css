@@ -113,6 +113,18 @@
 }
 
 @layer utilities {
+  .admin-job-position-input,
+  .admin-job-position-input:focus {
+    background-color: #1b1917 !important;
+    color: #f7f2e9 !important;
+    caret-color: #f7f2e9;
+  }
+
+  .admin-job-position-input::placeholder {
+    color: #a89f95;
+    opacity: 1;
+  }
+
   .admin-tabs-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: #a89f95 #1b1917;

@@ -82,3 +82,7 @@ export function getJobPositions() {
 export function addJobPosition({ nome }) {
   return callAppsScript('addJobPosition', { nome });
 }
+
+export function deleteJobPosition({ nome }) {
+  return callAppsScript('deleteJobPosition', { nome });
+}

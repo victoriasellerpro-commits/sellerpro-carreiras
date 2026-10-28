@@ -94,6 +94,8 @@ function dispatchAction(action, payload) {
       return getJobPositions();
     case 'addJobPosition':
       return addJobPosition(payload);
+    case 'deleteJobPosition':
+      return deleteJobPosition(payload);
     default:
       return { error: 'UNKNOWN_ACTION' };
   }
@@ -339,6 +341,26 @@ function addJobPosition(payload) {
   }
 
   return { jobPositions: jobPositions };
+}
+
+// Removes a vaga from future selection while preserving historical results.
+function deleteJobPosition(payload) {
+  var nome = String((payload && payload.nome) || '').trim();
+  if (!nome) return { error: 'INVALID_NAME' };
+
+  var sheet = getSheet(SHEET_VAGAS);
+  var data = sheet.getDataRange().getValues();
+  var deleted = false;
+  for (var i = data.length - 1; i >= 1; i--) {
+    var existing = String(data[i][0] || '').trim();
+    if (existing.toLowerCase() === nome.toLowerCase()) {
+      sheet.deleteRow(i + 1);
+      deleted = true;
+    }
+  }
+  if (!deleted) return { error: 'NOT_FOUND' };
+
+  return getJobPositions();
 }
 
 // Public duplicate check used by the identification form, before exposing

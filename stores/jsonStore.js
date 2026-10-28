@@ -243,6 +243,18 @@ export function addJobPosition({ nome }) {
   return { jobPositions: list };
 }
 
+export function deleteJobPosition({ nome }) {
+  const trimmed = String(nome || '').trim();
+  if (!trimmed) return { error: 'INVALID_NAME' };
+
+  const list = readJobPositions();
+  const updated = list.filter((position) => position.toLowerCase() !== trimmed.toLowerCase());
+  if (updated.length === list.length) return { error: 'NOT_FOUND' };
+
+  writeJobPositions(updated);
+  return { jobPositions: updated };
+}
+
 export function checkDuplicateResult({ email, phone }) {
   const cleanEmail = normalizeEmail(email);
   const cleanPhone = String(phone || '').replace(/\D/g, '');

@@ -263,6 +263,27 @@ apiRouter.post('/job-positions', requireAuth, async (req, res) => {
   }
 });
 
+// Protected: remove a vaga from future candidate selection. Historical
+// sessions and results keep their original vaga value.
+apiRouter.delete('/job-positions', requireAuth, async (req, res) => {
+  const { nome } = req.body || {};
+  if (!nome || !String(nome).trim()) {
+    return res.status(400).json({ error: 'Nome da vaga é obrigatório.' });
+  }
+  try {
+    const result = await candidateStore.deleteJobPosition({ nome });
+    if (result && result.error === 'NOT_FOUND') {
+      return res.status(404).json({ error: 'Vaga não encontrada.' });
+    }
+    if (result && result.error) {
+      return res.status(502).json({ error: 'Não foi possível excluir a vaga.' });
+    }
+    res.json(result);
+  } catch (err) {
+    res.status(502).json({ error: 'Não foi possível excluir a vaga.' });
+  }
+});
+
 // ---------- Session flow (create/resume, incremental answers & progress) ----------
 // Public: candidate identification submits here to create a new session or resume
 // an existing EM_ANDAMENTO one (looked up by email). Returns {blocked: true} if the
