@@ -236,7 +236,7 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
           {activeTab === 'overview' && (
             <div className="space-y-6 animate-fade-in">
               {/* Highlight summary card */}
-              <div className="bg-linear-to-r from-teal-900 via-slate-900 to-slate-800 text-white rounded-2xl p-5 sm:p-6 shadow-md relative overflow-hidden">
+              <div className="bg-linear-to-r from-[#11100e] via-[#1b1917] to-[#29231e] text-white rounded-2xl p-5 sm:p-6 shadow-md relative overflow-hidden">
                 <div className="relative z-10">
                   <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-white/10 text-white text-xs font-semibold mb-3 border border-white/10">
                     <Sparkles className="w-3.5 h-3.5 text-white" />
