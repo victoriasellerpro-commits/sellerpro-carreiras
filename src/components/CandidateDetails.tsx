@@ -662,8 +662,8 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
 
               {/* How to Work With This Candidate (Guide for Managers) */}
               <div className="bg-linear-to-br from-slate-900 to-teal-950 text-white rounded-2xl p-5 sm:p-6 shadow-sm">
-                <div className="flex items-center space-x-2 text-teal-200 mb-2">
-                  <Lightbulb className="w-4 h-4 text-amber-400" />
+                <div className="flex items-center space-x-2 text-white mb-2">
+                  <Lightbulb className="w-4 h-4 text-white" />
                   <h4 className="text-sm sm:text-base font-bold text-white">Como Trabalhar com Este Candidato</h4>
                 </div>
                 <p className="text-xs text-white mb-4">
@@ -753,7 +753,7 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
           {activeTab === 'pdi' && (
             <div className="space-y-6 animate-fade-in">
               {/* Leverage Strengths in PDI */}
-              <div className="bg-linear-to-br from-slate-900 to-teal-950 text-white rounded-2xl p-5 border border-slate-800 shadow-xs">
+              <div className="bg-[#11100e] text-white rounded-2xl p-5 border border-slate-800 shadow-xs">
                 <div className="flex items-center space-x-2 text-white mb-1">
                   <Sparkles className="w-4 h-4" />
                   <h4 className="text-sm sm:text-base font-bold text-white">Potencialize suas Forças</h4>
