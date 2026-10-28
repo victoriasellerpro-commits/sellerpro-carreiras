@@ -31,6 +31,8 @@ create table if not exists job_positions (
 insert into job_positions (nome) values ('Social Media')
   on conflict (nome) do nothing;
 
--- RLS fica desligado por padrão nessas tabelas (o backend acessa via service_role
--- key, que ignora RLS de qualquer forma). Se quiser travar o acesso via anon key
--- também, habilite RLS e não crie policies (nega tudo exceto service_role).
+-- O backend acessa estas tabelas com a chave service_role, que ignora RLS.
+-- Não crie policies para anon/authenticated: o acesso público deve permanecer bloqueado.
+alter table sessions enable row level security;
+alter table results enable row level security;
+alter table job_positions enable row level security;
