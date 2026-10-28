@@ -154,11 +154,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ onBackToTest, onUnauthoriz
       
       {/* Top Banner / Integration Readiness */}
       <div className="mb-8 bg-teal-900 text-white rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="relative z-10 max-w-2xl">
+        <div className="relative z-10 min-w-0 flex-1">
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-sans text-white">
             Resultados dos Processos Seletivos
           </h1>
-          <p className="text-white text-xs sm:text-sm mt-1.5 leading-relaxed">
+          <p className="text-white text-xs sm:text-sm mt-1.5 leading-relaxed xl:whitespace-nowrap">
             Acompanhe em tempo real as avaliações de personalidade BIG 5, alinhamento cultural e índices de raciocínio lógico dos candidatos.
           </p>
         </div>
