@@ -113,6 +113,24 @@
 }
 
 @layer utilities {
+  .admin-tabs-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #a89f95 #1b1917;
+  }
+
+  .admin-tabs-scrollbar::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .admin-tabs-scrollbar::-webkit-scrollbar-track {
+    background: #1b1917;
+  }
+
+  .admin-tabs-scrollbar::-webkit-scrollbar-thumb {
+    background: #a89f95;
+    border-radius: 9999px;
+  }
+
   .bg-white {
     background-color: #1b1917;
   }

@@ -198,7 +198,7 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
         </div>
 
         {/* Navigation Tabs */}
-        <div className="bg-white border-b border-slate-200 px-4 sm:px-6 overflow-x-auto scrollbar-none shrink-0 flex space-x-1 sm:space-x-2">
+        <div className="admin-tabs-scrollbar bg-white border-b border-slate-200 px-4 sm:px-6 overflow-x-auto overflow-y-hidden shrink-0 flex space-x-1 sm:space-x-2">
           {[
             { id: 'overview', label: 'Visão Geral', icon: Compass },
             { id: 'answers', label: 'Respostas do Teste', icon: ClipboardList },
@@ -216,7 +216,7 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id as TabType)}
-                className={`py-3 px-3 sm:px-4 text-xs sm:text-sm font-semibold border-b-2 whitespace-nowrap flex items-center space-x-1.5 transition-colors ${
+                className={`shrink-0 py-3 px-3 sm:px-4 text-xs sm:text-sm font-semibold border-b-2 whitespace-nowrap flex items-center space-x-1.5 transition-colors ${
                   isActive
                     ? 'border-teal-600 text-teal-600 bg-teal-50/40'
                     : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
