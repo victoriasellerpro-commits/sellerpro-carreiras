@@ -646,7 +646,7 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
                 <p className="text-xs text-slate-500 mb-3">
                   Contextos e funções onde tende a performar com máximo rendimento
                 </p>
-                <div className="p-3 bg-teal-50/50 rounded-xl border border-teal-100 text-xs sm:text-sm text-teal-950 font-medium mb-4">
+                <div className="p-3 bg-[#29231e] rounded-xl border border-[#3b3028] text-xs sm:text-sm text-white font-medium mb-4">
                   {report.idealEnvironment.summary}
                 </div>
 
@@ -661,7 +661,7 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
               </div>
 
               {/* How to Work With This Candidate (Guide for Managers) */}
-              <div className="bg-linear-to-br from-slate-900 to-teal-950 text-white rounded-2xl p-5 sm:p-6 shadow-sm">
+              <div className="bg-[#11100e] text-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-800">
                 <div className="flex items-center space-x-2 text-white mb-2">
                   <Lightbulb className="w-4 h-4 text-white" />
                   <h4 className="text-sm sm:text-base font-bold text-white">Como Trabalhar com Este Candidato</h4>
