@@ -201,13 +201,13 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
         <div className="admin-tabs-scrollbar bg-white border-b border-slate-200 px-4 sm:px-6 overflow-x-auto overflow-y-hidden shrink-0 flex space-x-1 sm:space-x-2">
           {[
             { id: 'overview', label: 'Visão Geral', icon: Compass },
-            { id: 'answers', label: 'Respostas do Teste', icon: ClipboardList },
             { id: 'analysis', label: 'Análise Detalhada', icon: Sparkles },
             { id: 'communication', label: 'Comunicação e Ambiente', icon: Users },
             { id: 'leadership', label: 'Estilo de Liderança', icon: TrendingUp },
             { id: 'pdi', label: 'Plano de PDI', icon: BookOpen },
             { id: 'cultural_logic', label: 'Fit Cultural & Lógica', icon: Brain },
             { id: 'foundations', label: 'Fundamentos BIG 5', icon: HelpCircle },
+            { id: 'answers', label: 'Respostas do Teste', icon: ClipboardList },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -238,14 +238,14 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
               {/* Highlight summary card */}
               <div className="bg-linear-to-r from-teal-900 via-slate-900 to-slate-800 text-white rounded-2xl p-5 sm:p-6 shadow-md relative overflow-hidden">
                 <div className="relative z-10">
-                  <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-white/10 text-teal-200 text-xs font-semibold mb-3 border border-white/10">
-                    <Sparkles className="w-3.5 h-3.5" />
+                  <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-white/10 text-white text-xs font-semibold mb-3 border border-white/10">
+                    <Sparkles className="w-3.5 h-3.5 text-white" />
                     <span>Perfil Comportamental Identificado</span>
                   </div>
                   <h4 className="text-xl sm:text-2xl font-black tracking-tight text-white mb-2">
                     {report.archetypeTitle}
                   </h4>
-                  <p className="text-xs sm:text-sm text-teal-100/90 leading-relaxed max-w-2xl font-normal">
+                  <p className="text-xs sm:text-sm text-white leading-relaxed max-w-2xl font-normal">
                     {report.summaryText}. {report.archetypeSubtitle}
                   </p>
                 </div>
@@ -666,14 +666,14 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
                   <Lightbulb className="w-4 h-4 text-amber-400" />
                   <h4 className="text-sm sm:text-base font-bold text-white">Como Trabalhar com Este Candidato</h4>
                 </div>
-                <p className="text-xs text-teal-200/80 mb-4">
+                <p className="text-xs text-white mb-4">
                   Diretrizes práticas para a gestora e equipe potencializarem a comunicação e resultados
                 </p>
 
                 <div className="space-y-2.5">
                   {report.howToWorkWith.map((tip, idx) => (
-                    <div key={idx} className="flex items-start space-x-3 p-3 rounded-xl bg-white/10 border border-white/10 text-xs sm:text-sm text-white/95">
-                      <span className="w-5 h-5 rounded-full bg-teal-500/40 text-teal-200 text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                    <div key={idx} className="flex items-start space-x-3 p-3 rounded-xl bg-white/10 border border-white/10 text-xs sm:text-sm text-white">
+                      <span className="w-5 h-5 rounded-full bg-teal-500/40 text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
                         {idx + 1}
                       </span>
                       <span>{tip}</span>
@@ -753,21 +753,21 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
           {activeTab === 'pdi' && (
             <div className="space-y-6 animate-fade-in">
               {/* Leverage Strengths in PDI */}
-              <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs">
-                <div className="flex items-center space-x-2 text-teal-700 mb-1">
+              <div className="bg-linear-to-br from-slate-900 to-teal-950 text-white rounded-2xl p-5 border border-slate-800 shadow-xs">
+                <div className="flex items-center space-x-2 text-white mb-1">
                   <Sparkles className="w-4 h-4" />
-                  <h4 className="text-sm sm:text-base font-bold text-slate-900">Potencialize suas Forças</h4>
+                  <h4 className="text-sm sm:text-base font-bold text-white">Potencialize suas Forças</h4>
                 </div>
-                <p className="text-xs text-slate-500 mb-4">Projetos e iniciativas para extrair o máximo potencial natural</p>
+                <p className="text-xs text-white mb-4">Projetos e iniciativas para extrair o máximo potencial natural</p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {report.pdi.leverageStrengths.map((item, idx) => (
-                    <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-                      <h5 className="font-bold text-xs sm:text-sm text-slate-900 mb-1">{item.title}</h5>
-                      <p className="text-xs text-slate-600 mb-3">{item.description}</p>
+                    <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/10">
+                      <h5 className="font-bold text-xs sm:text-sm text-white mb-1">{item.title}</h5>
+                      <p className="text-xs text-white mb-3">{item.description}</p>
                       <div className="space-y-1">
                         {item.actions.map((act, i) => (
-                          <div key={i} className="text-[11px] text-teal-900 font-medium flex items-center space-x-1.5">
+                          <div key={i} className="text-[11px] text-white font-medium flex items-center space-x-1.5">
                             <div className="w-1.5 h-1.5 rounded-full bg-teal-500" />
                             <span>{act}</span>
                           </div>
@@ -857,13 +857,13 @@ export const CandidateDetails: React.FC<CandidateDetailsProps> = ({ candidate, o
               {/* Next Steps */}
               <div className="bg-slate-900 text-white rounded-2xl p-5 border border-slate-800 shadow-xs">
                 <h4 className="text-sm sm:text-base font-bold text-white mb-1">Próximos Passos</h4>
-                <p className="text-xs text-slate-400 mb-4">Como utilizar esses insights para o plano de evolução</p>
+                <p className="text-xs text-white mb-4">Como utilizar esses insights para o plano de evolução</p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {report.nextSteps.map((step, idx) => (
                     <div key={idx} className="p-3 rounded-xl bg-white/5 border border-white/10">
-                      <h5 className="font-bold text-xs sm:text-sm text-teal-300 mb-1">{step.title}</h5>
-                      <p className="text-xs text-slate-300 leading-relaxed">{step.description}</p>
+                      <h5 className="font-bold text-xs sm:text-sm text-white mb-1">{step.title}</h5>
+                      <p className="text-xs text-white leading-relaxed">{step.description}</p>
                     </div>
                   ))}
                 </div>
